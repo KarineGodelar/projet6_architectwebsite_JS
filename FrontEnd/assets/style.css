@@ -157,7 +157,7 @@ button {
 	text-align: center;
 }
 
-button:active {
+.green-button {
 	background-color: #1D6154;
 	color: white;
 }
@@ -232,6 +232,7 @@ li:hover {
 	display: block;
 	margin: auto;
 	width: 80%;
+	margin-bottom: 0;
 }
 
 #introduction article {
@@ -244,6 +245,14 @@ li:hover {
 
 #introduction p {
 	margin-bottom: 0.5em;
+}
+
+.js-modale {
+	display: flex;
+	width: 15%;
+	margin-left: 10%;
+	margin-top: 10px;
+	align-items: center;
 }
 
 #portfolio h2 {
@@ -259,40 +268,48 @@ li:hover {
 	grid-row-gap: 20px;
 }
 
+
+
 .gallery img {
 	width: 100%;
 
 }
 
-#contact {
+#contact,
+#connexion {
 	width: 50%;
 	margin: auto;
 }
 
-#contact>* {
+#contact>*,
+#connexion>* {
 	text-align: center;
 
 }
 
-#contact h2 {
+#contact h2,
+#connexion h2 {
 	margin-bottom: 20px;
 }
 
-#contact form {
+#contact form,
+#connexion form {
 	text-align: left;
 	margin-top: 30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input,
+#connexion input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact label {
+#contact label,
+#connexion label {
 	margin: 2em 0 1em 0;
 }
 
@@ -312,8 +329,100 @@ input[type="submit"] {
 	border-radius: 60px;
 }
 
+.error-message {
+	margin-top: 20px;
+	color:red;
+	font-weight: 700;
+}
+
+
+.forgotten-password {
+	text-decoration: underline;
+}
+
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+/* Fenêtre modale */
+
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.modale-container {
+	padding: 20px;
+	box-sizing: border-box;
+	background-color: white;
+	width: 630px;
+	height: 731px;
+	max-width: calc(100 vw - 20px);
+	max-height: calc(100 vh - 20px);
+	/* overflow: auto; */
+	font-family: 'Work Sans';
+	font-weight: 400;
+	font-size: 26px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.js-modale-close {
+	width: 100%;
+	border: none;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modale-title {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.gallery-modale {
+	padding: 0;
+	margin: 0 10%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+	align-items: center;
+
+}
+
+.gallery-modale img {
+	object-fit: contain;
+	width: 76px;
+
+}
+
+.gallery-modale figcaption {
+	font-size: 12px;
+}
+
+.grey-line {
+	width: 420px;
+	height: 10px;
+	border-bottom: 1px solid #B3B3B3;
+}
+
+.suppr-gallery {
+	color: #d65353;
+	font-size: 14px;
 }
