@@ -288,12 +288,14 @@ li:hover {
 }
 
 #contact h2,
-#connexion h2 {
+#connexion h2,
+#modale2 h2 {
 	margin-bottom: 20px;
 }
 
 #contact form,
-#connexion form {
+#connexion form,
+#modale2 form {
 	text-align: left;
 	margin-top: 30px;
 	display: flex;
@@ -301,7 +303,8 @@ li:hover {
 }
 
 #contact input,
-#connexion input {
+#connexion input,
+#modale2 input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -309,7 +312,8 @@ li:hover {
 }
 
 #contact label,
-#connexion label {
+#connexion label,
+#modale2 label {
 	margin: 2em 0 1em 0;
 }
 
@@ -366,6 +370,7 @@ a {
 }
 
 .modale-container {
+	margin: 0;
 	padding: 20px;
 	box-sizing: border-box;
 	background-color: white;
@@ -379,15 +384,26 @@ a {
 	font-size: 26px;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 }
 
-.js-modale-close {
+.js-modale-close,
+.js-modale-back {
+	border: none;
+	padding: 0;
+	margin: 0 10px;
+}
+
+.js-modale-buttons-container {
 	width: 100%;
 	border: none;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	height: 50px;
 }
 
 .modale-title {

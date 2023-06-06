@@ -11,8 +11,6 @@
 		rel="stylesheet">
 	<meta name="description" content="">
 	<script type="module" src="script.js" defer></script>
-	<script type="module" src="connexion.js" defer></script>
-
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 
@@ -23,8 +21,7 @@
 			<ul>
 				<li>projets</li>
 				<li>contact</li>
-				<li class="login-menu">login</li>
-				<!-- <li class="login-menu"><a href="connexion.html" >login</a></li> -->
+				<li class="login-menu"><a href="connexion.html">login</a></li>
 				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 			</ul>
 		</nav>
@@ -76,11 +73,20 @@
 		<aside id="modale2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modale-title"
 			style="display: none;">
 			<div class="modale-container js-modale-stop">
-				<button class="js-modale-close"> <img src="./assets/icons/croix.png" alt="icône de croix"></button>
+				<div class="js-modale-buttons-container">
+					<button class="js-modale-back"> <img src="./assets/icons/Arrow_Back.png" alt="icône de flèche">
+					</button>
+					<button class="js-modale-close"> <img src="./assets/icons/croix.png" alt="icône de croix"></button>
+				</div>
 				<h3 class="modale-title">Ajout photo</h3>
 				<div class="gallery-modale">
 				</div>
 				<form method="post" class="modale-2-form">
+
+					<label for="title">Titre</label>
+					<input type="text" name="title" id="title">
+
+
 					<input type="submit" value="Ajouter une photo">
 				</form>
 			</div>

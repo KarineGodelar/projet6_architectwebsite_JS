@@ -1,7 +1,15 @@
-// page de connexion 
-const connexionForm = document.querySelector(".connexion-form");
+function isLogged(token) {
+    if (token !== null) {
+        document.location.href = "index.html";
+        return true;
+    } else {
+        return false;
+    }
+}
 
-connexionForm.addEventListener("submit", async function (event) {
+
+
+document.querySelector(".connexion-form").addEventListener("submit", async function (event) {
   
 
   
@@ -20,28 +28,19 @@ connexionForm.addEventListener("submit", async function (event) {
     console.log (loginOK);
     window.localStorage.setItem("token", loginOK.token);
     console.log (loginOK.message);
-});
-// try{    
-//     if (loginOK.token === undefined ) {
-//         throw new Error("Erreur dans l'identifiant ou le mot de passe");
-//     }
-// }
+    if (loginOK.token !== undefined ) {isLogged(loginOK.token);}
 
-// catch (error) {
-//             let errorMessage = document.querySelector(".error-message");
-//             errorMessage.innerHTML = error.message;
-//             console.log(error.message);
-
-// }})
-
-const tokenRecupere = window.localStorage.getItem("token");
-console.log("token recupéré de l'API :", tokenRecupere);
-
-export function isLogged() {
-    if (tokenRecupere !== null) {
-        document.location.href = "index.html";
-        return true;
-    } else {
-        return false;
+   try{    
+    if (loginOK.token === undefined ) {
+        throw new Error("Erreur dans l'identifiant ou le mot de passe");
+        
     }
 }
+
+catch (error) {
+            let errorMessage = document.querySelector(".error-message");
+            errorMessage.innerHTML = error.message;
+            console.log(error.message);
+
+} 
+});

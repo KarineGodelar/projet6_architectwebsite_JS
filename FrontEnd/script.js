@@ -1,4 +1,3 @@
-import { isLogged } from "./connexion.js";
 //Générer la galerie de photos à partir de l'API
 function genererGallery(projets) {
     const gallerySection = document.querySelector(".gallery");
@@ -94,6 +93,20 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 });
 
+// gestion connexion / déconnexion
+
+const tokenRecupere = window.localStorage.getItem("token");
+console.log("token recupéré de l'API :", tokenRecupere);
+if (tokenRecupere !== undefined ) {
+    document.querySelector(".login-menu").innerHTML="logout";
+    document.querySelector(".login-menu").addEventListener ("click", () => {
+        window.localStorage.removeItem("token");
+        document.location.href = "connexion.html";
+    }
+    
+    )
+}
+
 // Fenêtre modale
 
 const modalSection = document.querySelector(".js-modale");
@@ -130,10 +143,7 @@ function stopPropagation(event) {
 
 
 modalSection.addEventListener("click", (event) => {
-
     openModale(event);
-
-
 }
 
 );
@@ -141,8 +151,6 @@ modalSection.addEventListener("click", (event) => {
 function genererPhotosModale(projets) {
     const gallerySection = document.querySelector(".gallery-modale");
     gallerySection.innerHTML = "";
-    // const imageSection = document.createElement("div");
-    // gallerySection.appendChild(imageSection);
 
     for (let i = 0; i < projets.length; i++) {
         const galleryFigure = document.createElement("figure");
@@ -154,22 +162,35 @@ function genererPhotosModale(projets) {
         workFigcaption.innerHTML = "éditer";
         galleryFigure.appendChild(workFigcaption);
         gallerySection.appendChild(galleryFigure);
-    }
+    }}
+
+//modale 2 , je recopie la fonction openModale
+
+function openModale2() {
+    const target = document.querySelector("#modale2");
+    target.style.display = null;
+    target.removeAttribute("aria-hidden");
+    target.setAttribute("aria-modal", "true");
+    cibleModale = target;
+    cibleModale.addEventListener("click", closeModale);
+    cibleModale.querySelector(".js-modale-close").addEventListener("click", closeModale);
+    cibleModale.querySelector(".js-modale-stop").addEventListener("click", stopPropagation);
 }
+
+//
+
+
 
 modalSection.addEventListener("click", async function () {
     const reponse = await fetch("http://localhost:5678/api/works/");
     const projets = await reponse.json();
-
     genererPhotosModale(projets);
+    const editPicture = document.querySelectorAll(".picture-edit");
 
-    const cbox = document.querySelectorAll(".picture-edit");
-
-    for (let i = 0; i < cbox.length; i++) {
-        cbox[i].addEventListener("click", function () {
-            alert("yeah!");
+    for (let i = 0; i < editPicture.length; i++) {
+        editPicture[i].addEventListener("click", function (e) {
+            openModale2(e);
         });
     }
 
 });
-
