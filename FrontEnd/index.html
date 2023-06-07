@@ -79,13 +79,21 @@
 					<button class="js-modale-close"> <img src="./assets/icons/croix.png" alt="icône de croix"></button>
 				</div>
 				<h3 class="modale-title">Ajout photo</h3>
-				<div class="gallery-modale">
-				</div>
-				<form method="post" class="modale-2-form">
-
+	
+					<div class="ajout-photo">
+						<img src="./assets/icons/ajout-photo.png" alt="icone pour ajouter des photos" class="ajout-photo-image">
+						<button class="ajout-photo-button">+ Ajouter photo</button>
+						<p class="ajout-photo-subtext">jpg, png : 4mo max</p>
+					</div>
+			<form method="post" class="modale-form">
 					<label for="title">Titre</label>
 					<input type="text" name="title" id="title">
-
+					<label for="form-category">Catégorie</label>
+					<select name="form-category" id="form-category">
+						<option class="form-category-option" value="category-objets">Objets</option>
+						<option class="form-category-option" value="category-apparts">Appartements</option>
+						<option class="form-category-option" value="category-hotels">Hôtels & Restaurants</option>
+					</select>
 
 					<input type="submit" value="Ajouter une photo">
 				</form>

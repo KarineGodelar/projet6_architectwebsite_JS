@@ -295,6 +295,7 @@ li:hover {
 
 #contact form,
 #connexion form,
+#modale form,
 #modale2 form {
 	text-align: left;
 	margin-top: 30px;
@@ -304,16 +305,38 @@ li:hover {
 
 #contact input,
 #connexion input,
-#modale2 input {
+#modale input,
+#modale2 input,
+#form-category {
+	background-color: white;
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+#form-category {
+	font-family: 'Work Sans';
+	font-size: 14px;
+	font-weight: 400;
+}
+
+.form-category-option {
+	font-family: 'Work Sans';
+	font-size: 14px;
+}
+
+select {
+	font-family: 'Work Sans';
+	font-size: 14px;
+	font-weight: 400;
+}
+
+
 #contact label,
 #connexion label,
-#modale2 label {
+#modale2 label
+ {
 	margin: 2em 0 1em 0;
 }
 
@@ -335,7 +358,7 @@ input[type="submit"] {
 
 .error-message {
 	margin-top: 20px;
-	color:red;
+	color: red;
 	font-weight: 700;
 }
 
@@ -381,11 +404,16 @@ a {
 	/* overflow: auto; */
 	font-family: 'Work Sans';
 	font-weight: 400;
-	font-size: 26px;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.modale-container h3 {
+	font-size: 26px;
+
 }
 
 .js-modale-close,
@@ -441,4 +469,38 @@ a {
 .suppr-gallery {
 	color: #d65353;
 	font-size: 14px;
+}
+
+.ajout-photo {
+	box-sizing: border-box;
+	width: 420px;
+	height: 169px;
+	background-color: #E8F1F6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.ajout-photo-button {
+	font-family: 'Work Sans';
+	margin: 10px;
+	color: #306685;
+	background-color: #CBD6DC;
+	border: none;
+}
+
+
+.ajout-photo-subtext {
+	font-size: 10px;
+	color: #444444;
+}
+
+.ajout-photo-image {
+	width: 58px;
+	height: 46px;
+}
+
+.modale-form input, select {
+	width: 420px;
 }
