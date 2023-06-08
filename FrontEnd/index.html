@@ -32,9 +32,9 @@
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="photo de Sophie Bluel">
 
-				<div id="modifier-gallery">
-					<a href="#modale" class="js-modale"><img id="sophie" src="./assets/icons/crayon.png"
-							alt="icône de crayon"> modifier</a>
+				<div class="modifier-gallery">
+					<a href="#modale" class="js-modale"><img src="./assets/icons/crayon-svg.svg" alt="icône de crayon">
+						modifier</a>
 				</div>
 
 			</figure>
@@ -57,14 +57,14 @@
 
 		<aside id="modale" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modale-title"
 			style="display: none;">
-			<div class="modale-container js-modale-stop">
-				<button class="js-modale-close"> <img src="./assets/icons/croix.png" alt="icône de croix"></button>
+			<div class="modale-container js-modale-1-stop">
+				<button class="js-modale-1-close"> <img src="./assets/icons/croix.png" alt="icône de croix"></button>
 				<h3 class="modale-title">Galerie photo</h3>
 				<div class="gallery-modale">
 				</div>
 				<div class="grey-line"></div>
 				<form method="post" class="modale-form">
-					<input type="submit" value="Ajouter une photo">
+					<input type="submit" value="Ajouter une photo" class="ajouter-photo">
 				</form>
 				<div class="suppr-gallery">Supprimer la galerie</div>
 			</div>
@@ -72,20 +72,22 @@
 
 		<aside id="modale2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modale-title"
 			style="display: none;">
-			<div class="modale-container js-modale-stop">
+			<div class="modale-container js-modale-2-stop">
 				<div class="js-modale-buttons-container">
-					<button class="js-modale-back"> <img src="./assets/icons/Arrow_Back.png" alt="icône de flèche">
+					<button class="js-modale-2-back"> <img src="./assets/icons/Arrow_Back.png" alt="icône de flèche">
 					</button>
-					<button class="js-modale-close"> <img src="./assets/icons/croix.png" alt="icône de croix"></button>
+					<button class="js-modale-2-close"> <img src="./assets/icons/croix.png"
+							alt="icône de croix"></button>
 				</div>
 				<h3 class="modale-title">Ajout photo</h3>
-	
-					<div class="ajout-photo">
-						<img src="./assets/icons/ajout-photo.png" alt="icone pour ajouter des photos" class="ajout-photo-image">
-						<button class="ajout-photo-button">+ Ajouter photo</button>
-						<p class="ajout-photo-subtext">jpg, png : 4mo max</p>
-					</div>
-			<form method="post" class="modale-form">
+
+				<div class="ajout-photo">
+					<img src="./assets/icons/ajout-photo.png" alt="icone pour ajouter des photos"
+						class="ajout-photo-image">
+					<button class="ajout-photo-button">+ Ajouter photo</button>
+					<p class="ajout-photo-subtext">jpg, png : 4mo max</p>
+				</div>
+				<form method="post" class="modale-form">
 					<label for="title">Titre</label>
 					<input type="text" name="title" id="title">
 					<label for="form-category">Catégorie</label>
@@ -104,7 +106,13 @@
 
 
 		<section id="portfolio">
-			<h2>Mes Projets</h2>
+			<div class="gallery-title">
+				<h2>Mes Projets</h2>
+				<div class="modifier-gallery">
+					<a href="#modale" class="js-modale"><img src="./assets/icons/crayon-svg.svg" alt="icône de crayon">
+						modifier</a>
+				</div>
+			</div>
 			<div class="categories">
 				<button class="tous-button">Tous</button>
 				<button class="objets-button">Objets</button>

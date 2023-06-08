@@ -255,6 +255,10 @@ li:hover {
 	align-items: center;
 }
 
+.js-modale img {
+	height:20px;
+}
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
@@ -308,7 +312,6 @@ li:hover {
 #modale input,
 #modale2 input,
 #form-category {
-	background-color: white;
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -316,6 +319,7 @@ li:hover {
 }
 
 #form-category {
+	background-color: white;
 	font-family: 'Work Sans';
 	font-size: 14px;
 	font-weight: 400;
@@ -335,8 +339,7 @@ select {
 
 #contact label,
 #connexion label,
-#modale2 label
- {
+#modale2 label {
 	margin: 2em 0 1em 0;
 }
 
@@ -380,6 +383,12 @@ a {
 
 /* Fenêtre modale */
 
+.gallery-title {
+	display: flex;
+	justify-content: center;
+	gap: 57px;
+}
+
 .modal {
 	position: fixed;
 	top: 0;
@@ -416,8 +425,9 @@ a {
 
 }
 
-.js-modale-close,
-.js-modale-back {
+.js-modale-1-close,
+.js-modale-2-close,
+.js-modale-2-back {
 	border: none;
 	padding: 0;
 	margin: 0 10px;
@@ -433,6 +443,15 @@ a {
 	padding: 0;
 	height: 50px;
 }
+
+.js-modale-1-close {
+	width: 100%;
+	margin-top: 15px;
+	margin-right: 30px;
+	display: flex;
+	justify-content: flex-end;
+}
+
 
 .modale-title {
 	display: flex;
@@ -458,6 +477,18 @@ a {
 
 .gallery-modale figcaption {
 	font-size: 12px;
+}
+
+.picture-edit {
+	display: flex;
+	flex-direction: column;
+}
+
+.suppr-icon {
+	height:20px;
+	position: absolute;
+	margin-top: 6px;
+	margin-left: 20px;
 }
 
 .grey-line {
@@ -501,6 +532,7 @@ a {
 	height: 46px;
 }
 
-.modale-form input, select {
+.modale-form input,
+select {
 	width: 420px;
 }
