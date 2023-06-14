@@ -269,7 +269,7 @@ photoForm.addEventListener("submit", async function (e) {
     let photoFile = balisePhotoFile.value;
     let fileRegex = new RegExp("[a-z0-9._-]+\.(png|jpg)$");
     let fileResultat = fileRegex.test(photoFile);
-        console.log("photoFile",photoFile)
+    console.log("photoFile", photoFile)
 
     let balisePhotoTitle = document.getElementById("title");
     let photoTitle = balisePhotoTitle.value;
@@ -278,7 +278,7 @@ photoForm.addEventListener("submit", async function (e) {
     let resultat = titleRegex.test(photoTitle);
 
     let fileErrorMessage = document.querySelector(".file-error-message");
-    if (resultat === false) {
+    if (fileResultat === false) {
         fileErrorMessage.innerHTML = "Le fichier choisi n'est pas valide";
     } else {
         fileErrorMessage.innerHTML = "";
@@ -293,6 +293,11 @@ photoForm.addEventListener("submit", async function (e) {
 
     let baliseCategory = document.getElementById("form-category");
     let photoCategory = baliseCategory.value;
+
+    //essai
+
+    const tableau = balisePhotoFile.files;
+    console.log ("tableau",tableau[0].name);
 
     // Ajout d'un nouveau projet
 
