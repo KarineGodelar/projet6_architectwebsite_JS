@@ -63,7 +63,7 @@
 				<div class="gallery-modale">
 				</div>
 				<div class="grey-line"></div>
-				<form method="post" class="modale-form">
+				<form method="#" class="modale-form">
 					<input type="submit" value="Ajouter une photo" class="ajouter-photo">
 				</form>
 				<div class="suppr-gallery">Supprimer la galerie</div>
@@ -81,22 +81,24 @@
 				</div>
 				<h3 class="modale-title">Ajout photo</h3>
 
-				<div class="ajout-photo">
-					<img src="./assets/icons/ajout-photo.png" alt="icone pour ajouter des photos"
-						class="ajout-photo-image">
-					<button class="ajout-photo-button">+ Ajouter photo</button>
-					<p class="ajout-photo-subtext">jpg, png : 4mo max</p>
-				</div>
-				<form method="post" class="modale-form">
+				<form id="form2" enctype="multipart/form-data" method="post" action="http://localhost:5678/api/users/login" name="fileinfo" class="modale-form form2">
+					<div class="ajout-photo">
+						<img src="./assets/icons/ajout-photo.png" alt="icone pour ajouter des photos"
+							class="ajout-photo-image">
+							<button class="ajout-photo-button"><label for="ajout-file-photo">+ Ajouter photo</label></button>
+						<input type="file" id="ajout-file-photo" name="ajout-file-photo" style="display:none" class="ajout-photo-button" accept=".jpg, .jpeg, .png" multiple >
+						<p class="ajout-photo-subtext">jpg, png : 4mo max</p>
+					</div>
 					<label for="title">Titre</label>
 					<input type="text" name="title" id="title">
 					<label for="form-category">Catégorie</label>
 					<select name="form-category" id="form-category">
-						<option class="form-category-option" value="category-objets">Objets</option>
-						<option class="form-category-option" value="category-apparts">Appartements</option>
-						<option class="form-category-option" value="category-hotels">Hôtels & Restaurants</option>
+						<option class="form-category-option" value="1">Objets</option>
+						<option class="form-category-option" value="2">Appartements</option>
+						<option class="form-category-option" value="3">Hôtels & Restaurants</option>
 					</select>
-
+					<div class="file-error-message"></div>
+					<div class="modale-error-message"></div>
 					<input type="submit" value="Ajouter une photo">
 				</form>
 			</div>

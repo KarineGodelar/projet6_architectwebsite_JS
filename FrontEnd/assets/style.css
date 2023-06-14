@@ -330,13 +330,6 @@ li:hover {
 	font-size: 14px;
 }
 
-select {
-	font-family: 'Work Sans';
-	font-size: 14px;
-	font-weight: 400;
-}
-
-
 #contact label,
 #connexion label,
 #modale2 label {
@@ -359,7 +352,9 @@ input[type="submit"] {
 	border-radius: 60px;
 }
 
-.error-message {
+.error-message,
+.modale-error-message,
+.file-error-message {
 	margin-top: 20px;
 	color: red;
 	font-weight: 700;
