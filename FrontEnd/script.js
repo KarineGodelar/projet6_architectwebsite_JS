@@ -116,8 +116,6 @@ let cibleModale = null;
 function openModale(e) {
     const target = document.querySelector(e.target.getAttribute("href"));
     target.style.display = null;
-    target.removeAttribute("aria-hidden");
-    target.setAttribute("aria-modal", "true");
     cibleModale = target;
     cibleModale.addEventListener("click", closeModale);
     cibleModale.querySelector(".js-modale-1-close").addEventListener("click", closeModale);
@@ -130,8 +128,6 @@ function closeModale(e) {
 
     e.preventDefault();
     cibleModale.style.display = "none";
-    cibleModale.setAttribute("aria-hidden", "true");
-    cibleModale.removeAttribute("aria-modal");
     cibleModale.removeEventListener("click", closeModale);
     cibleModale.querySelector(".js-modale-1-close").removeEventListener("click", closeModale);
     cibleModale.querySelector(".js-modale-1-stop").removeEventListener("click", stopPropagation);
@@ -175,11 +171,10 @@ function genererPhotosModale(projets) {
 
 //modale 2 , je recopie la fonction openModale
 
-function openModale2() {
+function openModale2(e) {
+    e.preventDefault();
     const target = document.querySelector("#modale2");
     target.style.display = null;
-    target.removeAttribute("aria-hidden");
-    target.setAttribute("aria-modal", "true");
     cibleModale = target;
     cibleModale.addEventListener("click", closeModale2);
     cibleModale.querySelector(".js-modale-2-back").addEventListener("click", backModale2);
@@ -193,8 +188,6 @@ function backModale2(e) {
 
     e.preventDefault();
     cibleModale.style.display = "none";
-    cibleModale.setAttribute("aria-hidden", "true");
-    cibleModale.removeAttribute("aria-modal");
     cibleModale.removeEventListener("click", closeModale);
     cibleModale.querySelector(".js-modale-2-close").removeEventListener("click", backModale2);
     cibleModale.querySelector(".js-modale-2-stop").removeEventListener("click", stopPropagation);
@@ -208,8 +201,6 @@ function closeModale2(e) {
     e.preventDefault();
     cibleModale.style.display = "none";
     cibleModale1.style.display = "none";
-    cibleModale.setAttribute("aria-hidden", "true");
-    cibleModale.removeAttribute("aria-modal");
     cibleModale.removeEventListener("click", closeModale);
     cibleModale.querySelector(".js-modale-2-close").removeEventListener("click", closeModale2);
     cibleModale.querySelector(".js-modale-2-stop").removeEventListener("click", stopPropagation);
@@ -302,7 +293,7 @@ photoForm.addEventListener("submit", async function (e) {
     // Ajout d'un nouveau projet
 
     var photoFormData = new FormData();
-    photoFormData.append("image", photoFile);
+    photoFormData.append("image", balisePhotoFile.files[0]);
     photoFormData.append("title", photoTitle);
     photoFormData.append("category", photoCategory);
 
@@ -311,9 +302,7 @@ photoForm.addEventListener("submit", async function (e) {
     const fetchReponse = await fetch("http://localhost:5678/api/works/", {
         method: "POST",
         headers: {
-            "accept": "application/json",
-            "Authorization": `Bearer ${tokenRecupere}`,
-            "Content-Type": "multipart/form-data"
+            "Authorization": `Bearer ${tokenRecupere}`
         },
         body: photoFormData
     });
