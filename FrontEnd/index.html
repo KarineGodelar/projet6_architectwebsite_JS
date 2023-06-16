@@ -55,8 +55,7 @@
 
 
 
-		<aside id="modale" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modale-title"
-			style="display: none;">
+		<aside id="modale" class="modal" aria-hidden="true" style="display: none;">
 			<div class="modale-container js-modale-1-stop">
 				<button class="js-modale-1-close"> <img src="./assets/icons/croix.png" alt="icône de croix"></button>
 				<h3 class="modale-title">Galerie photo</h3>
@@ -70,8 +69,7 @@
 			</div>
 		</aside>
 
-		<aside id="modale2" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modale-title"
-			style="display: none;">
+		<aside id="modale2" class="modal" style="display: none;">
 			<div class="modale-container js-modale-2-stop">
 				<div class="js-modale-buttons-container">
 					<button class="js-modale-2-back"> <img src="./assets/icons/Arrow_Back.png" alt="icône de flèche">
@@ -81,14 +79,14 @@
 				</div>
 				<h3 class="modale-title">Ajout photo</h3>
 
-				<form id="form2" enctype="multipart/form-data" method="post" action="http://localhost:5678/api/users/login" name="fileinfo" class="modale-form form2">
-					<div class="ajout-photo">
-						<img src="./assets/icons/ajout-photo.png" alt="icone pour ajouter des photos"
-							class="ajout-photo-image">
-							<button class="ajout-photo-button"><label for="ajout-file-photo">+ Ajouter photo</label></button>
-						<input type="file" id="ajout-file-photo" name="ajout-file-photo" style="display:none" class="ajout-photo-button" accept="image/jpg, image/jpeg, image/png">
-						<p class="ajout-photo-subtext">jpg, png : 4mo max</p>
-					</div>
+				<form id="form2" enctype="multipart/form-data" method="post"
+					action="http://localhost:5678/api/users/login" name="fileinfo" class="modale-form form2">
+					<img src="./assets/icons/ajout-photo.png" alt="icone pour ajouter des photos"
+						class="ajout-photo-image">
+					<label for="ajout-file-photo">+ Ajouter photo</label>
+					<input type="file" id="ajout-file-photo" name="ajout-file-photo"
+						accept="image/jpg, image/jpeg, image/png" class="ajout-photo-button">
+					<p class="ajout-photo-subtext">jpg, png : 4mo max</p>
 					<label for="title">Titre</label>
 					<input type="text" name="title" id="title">
 					<label for="form-category">Catégorie</label>
@@ -99,12 +97,10 @@
 					</select>
 					<div class="file-error-message"></div>
 					<div class="modale-error-message"></div>
-					<input type="submit" value="Ajouter une photo">
+					<input type="submit" value="Ajouter une photo" class="submit-ajout-photo">
 				</form>
 			</div>
 		</aside>
-
-
 
 
 		<section id="portfolio">

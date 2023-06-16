@@ -13,27 +13,15 @@ function genererGallery(projets) {
         workFigcaption.innerHTML = projets[i].title;
         galleryFigure.appendChild(workFigcaption);
         gallerySection.appendChild(galleryFigure);
-
     }
 }
 
-const projectTable = [0];
-
 document.addEventListener("DOMContentLoaded", async function () {
+
     const reponse = await fetch("http://localhost:5678/api/works/");
     const projets = await reponse.json();
 
     genererGallery(projets);
-
-    const gallerySet = new Set();
-    for (let i = 0; i < projets.length; i++) {
-        gallerySet.add(projets[i]);
-    }
-
-    console.log(gallerySet);
-    console.log(projets);
-
-
 
     const boutonTous = document.querySelector(".tous-button");
     boutonTous.addEventListener("click", () => {
@@ -53,12 +41,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         const projetsObjets = Array.from(projets).filter(function (projet) {
             return projet.categoryId == 1;
-        }
-        )
-
+        })
         genererGallery(projetsObjets);
-        console.log(projetsObjets);
-    })
+    });
 
     const boutonAppart = document.querySelector(".appart-button");
     boutonAppart.addEventListener("click", async function () {
@@ -69,11 +54,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         const projetsAppart = Array.from(projets).filter(function (projet) {
             return projet.categoryId == 2;
-        }
-        )
-
+        })
         genererGallery(projetsAppart);
-        console.log(projetsAppart);
     });
 
     const boutonHotels = document.querySelector(".hotels-button");
@@ -85,11 +67,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         const projetsHotels = Array.from(projets).filter(function (projet) {
             return projet.categoryId == 3;
-        }
-        )
-
+        })
         genererGallery(projetsHotels);
-        console.log(projetsHotels);
     });
 });
 
@@ -102,13 +81,10 @@ if (tokenRecupere !== undefined) {
     document.querySelector(".login-menu").addEventListener("click", () => {
         window.localStorage.removeItem("token");
         document.location.href = "connexion.html";
-    }
-
-    )
+    });
 }
 
 // Fenêtre modale
-
 
 const modalSection = document.querySelectorAll(".js-modale");
 let cibleModale = null;
@@ -207,27 +183,18 @@ function closeModale2(e) {
     cibleModale = null;
 }
 
-
-//
-
 for (let i = 0; i < modalSection.length; i++) {
 
-    modalSection[i].addEventListener("click", async function () {
+    modalSection[i].addEventListener("click", async function (e) {
+        e.preventDefault;
         const reponse = await fetch("http://localhost:5678/api/works/");
         const projets = await reponse.json();
         genererPhotosModale(projets);
-        //clic sur bouton editer
-        const editPicture = document.querySelectorAll(".edit-button");
-        for (let i = 0; i < editPicture.length; i++) {
-            editPicture[i
-            ].addEventListener("click", function (e) {
-                openModale2(e);
-            });
-        }
         // clic sur bouton supprimer
         const supprIcons = document.querySelectorAll(".suppr-icon");
         for (let i = 0; i < supprIcons.length; i++) {
-            supprIcons[i].addEventListener("click", async function () {
+            supprIcons[i].addEventListener("click", async function (e) {
+                e.preventDefault;
                 await fetch(`http://localhost:5678/api/works/${projets[i].id}`, {
                     method: "DELETE",
                     headers: { "Authorization": `Bearer ${tokenRecupere}` }
@@ -243,7 +210,6 @@ for (let i = 0; i < modalSection.length; i++) {
 
 document.querySelector(".js-modale-1-close").addEventListener("click", () => {
     document.querySelector("#modale").style.display = "none";
-
 });
 
 document.querySelector(".ajouter-photo").addEventListener("click", function (e) {
@@ -251,55 +217,46 @@ document.querySelector(".ajouter-photo").addEventListener("click", function (e) 
 });
 
 // Formulaire ajout photo
-
 let photoForm = document.querySelector(".form2");
-photoForm.addEventListener("submit", async function (e) {
+var photoFormData = new FormData();
+function creerNewProject(e) {
     e.preventDefault();
-
     let balisePhotoFile = document.getElementById("ajout-file-photo");
     let photoFile = balisePhotoFile.value;
-    let fileRegex = new RegExp("[a-z0-9._-]+\.(png|jpg)$");
-    let fileResultat = fileRegex.test(photoFile);
-    console.log("photoFile", photoFile)
 
     let balisePhotoTitle = document.getElementById("title");
     let photoTitle = balisePhotoTitle.value;
 
+    let baliseCategory = document.getElementById("form-category");
+    let photoCategory = baliseCategory.value;
+    let fileRegex = new RegExp("[a-z0-9._-]+\.(png|jpg)$");
+
     let titleRegex = new RegExp("[a-z0-9._-]");
-    let resultat = titleRegex.test(photoTitle);
 
     let fileErrorMessage = document.querySelector(".file-error-message");
-    if (fileResultat === false) {
+    if (fileRegex.test(photoFile) === false) {
         fileErrorMessage.innerHTML = "Le fichier choisi n'est pas valide";
     } else {
         fileErrorMessage.innerHTML = "";
     }
-
     let modaleErrorMessage = document.querySelector(".modale-error-message");
-    if (resultat === false) {
+    if (titleRegex.test(photoTitle) === false) {
         modaleErrorMessage.innerHTML = "Le titre saisi n'est pas valide";
     } else {
         modaleErrorMessage.innerHTML = "";
     }
 
-    let baliseCategory = document.getElementById("form-category");
-    let photoCategory = baliseCategory.value;
-
-    //essai
-
-    const tableau = balisePhotoFile.files;
-    console.log ("tableau",tableau[0].name);
-
-    // Ajout d'un nouveau projet
-
-    var photoFormData = new FormData();
     photoFormData.append("image", balisePhotoFile.files[0]);
     photoFormData.append("title", photoTitle);
     photoFormData.append("category", photoCategory);
+}
 
-    console.log(photoFormData);
+// Bouton ajouter photo
 
-    const fetchReponse = await fetch("http://localhost:5678/api/works/", {
+photoForm.addEventListener("submit", async function (e) {
+
+    creerNewProject(e);
+    await fetch("http://localhost:5678/api/works/", {
         method: "POST",
         headers: {
             "Authorization": `Bearer ${tokenRecupere}`
@@ -307,9 +264,5 @@ photoForm.addEventListener("submit", async function (e) {
         body: photoFormData
     });
 
-    // const projetFetch = await fetchReponse.json();
-    // console.log("projetFetch", projetFetch);
-})
-
-
+});
 
