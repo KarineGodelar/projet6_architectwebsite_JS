@@ -531,3 +531,8 @@ a {
 select {
 	width: 420px;
 }
+
+.photo-ajoutee {
+	height: 200px;
+	width: 500px;
+}

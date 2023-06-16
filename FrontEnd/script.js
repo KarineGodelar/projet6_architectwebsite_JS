@@ -73,20 +73,25 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 // gestion connexion / déconnexion
-
+const modalSection = document.querySelectorAll(".js-modale");
 const tokenRecupere = window.localStorage.getItem("token");
 console.log("token recupéré de l'API :", tokenRecupere);
-if (tokenRecupere !== undefined) {
+if (tokenRecupere !== null) {
     document.querySelector(".login-menu").innerHTML = "logout";
     document.querySelector(".login-menu").addEventListener("click", () => {
         window.localStorage.removeItem("token");
         document.location.href = "connexion.html";
     });
+    document.querySelector(".categories").style.display = "none";
+} else {
+    for (let i = 0; i < modalSection.length; i++) {
+        modalSection[i].style.display = "none";
+    }
 }
 
 // Fenêtre modale
 
-const modalSection = document.querySelectorAll(".js-modale");
+
 let cibleModale = null;
 
 function openModale(e) {
@@ -217,6 +222,10 @@ document.querySelector(".ajouter-photo").addEventListener("click", function (e) 
 });
 
 // Formulaire ajout photo
+
+
+
+
 let photoForm = document.querySelector(".form2");
 var photoFormData = new FormData();
 function creerNewProject(e) {
@@ -249,7 +258,14 @@ function creerNewProject(e) {
     photoFormData.append("image", balisePhotoFile.files[0]);
     photoFormData.append("title", photoTitle);
     photoFormData.append("category", photoCategory);
+
+
+    console.log(balisePhotoFile.files[0]);
+
 }
+
+
+ 
 
 // Bouton ajouter photo
 
