@@ -221,16 +221,41 @@ document.querySelector(".ajouter-photo").addEventListener("click", function (e) 
     openModale2(e);
 });
 
-// Formulaire ajout photo
+// Formulaire modale 2 partie ajout photo
+
+let balisePhotoFile = document.getElementById("ajout-file-photo");
+
+
+console.log("balise ajout",document.getElementById("ajout-file-photo").value);
+
+balisePhotoFile.addEventListener("change", () => {
+
+    if (document.getElementById("ajout-file-photo").value !== "") {
+    document.querySelector(".ajout-photo-subtext").style.display = "none";}
+
+
+}
+
+)
 
 
 
+
+// .ajout-photo-image,
+// .label-ajout-photo-image,
+// .ajout-photo-button,
+// .ajout-photo-subtext {
+// 	display: none;
+// }
+
+
+// formulaire entier
 
 let photoForm = document.querySelector(".form2");
 var photoFormData = new FormData();
 function creerNewProject(e) {
     e.preventDefault();
-    let balisePhotoFile = document.getElementById("ajout-file-photo");
+
     let photoFile = balisePhotoFile.value;
 
     let balisePhotoTitle = document.getElementById("title");
@@ -262,10 +287,10 @@ function creerNewProject(e) {
 
     console.log(balisePhotoFile.files[0]);
 
+
 }
 
 
- 
 
 // Bouton ajouter photo
 
@@ -281,4 +306,5 @@ photoForm.addEventListener("submit", async function (e) {
     });
 
 });
+
 

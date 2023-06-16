@@ -79,14 +79,16 @@
 				</div>
 				<h3 class="modale-title">Ajout photo</h3>
 
+
 				<form id="form2" enctype="multipart/form-data" method="post"
 					action="http://localhost:5678/api/users/login" name="fileinfo" class="modale-form form2">
 					<img src="./assets/icons/ajout-photo.png" alt="icone pour ajouter des photos"
 						class="ajout-photo-image">
-					<label for="ajout-file-photo">+ Ajouter photo</label>
-					<input type="file" id="ajout-file-photo" name="ajout-file-photo" accept="image/jpg, image/jpeg, image/png" class="ajout-photo-button">
+					<label for="ajout-file-photo" class="label-ajout-photo-image">+ Ajouter photo</label>
+					<input type="file" id="ajout-file-photo" name="ajout-file-photo"
+						accept="image/jpg, image/jpeg, image/png" class="ajout-photo-button" onchange="previewPicture(this)" required>
 					<img src="" class="image-ajoutee">
-					<p class="ajout-photo-subtext">jpg, png : 4mo max</p>
+					<p class="ajout-photo-subtext" style="display:contents;">jpg, png : 4mo max</p>
 					<label for="title">Titre</label>
 					<input type="text" name="title" id="title">
 					<label for="form-category">Catégorie</label>
@@ -99,9 +101,27 @@
 					<div class="modale-error-message"></div>
 					<input type="submit" value="Valider" class="submit-ajout-photo">
 				</form>
+				<img src="#" alt="" id="image">
 			</div>
 		</aside>
 
+		<script type="text/javascript">
+			// L'image img#image
+			var image = document.getElementById("image");
+
+			// La fonction previewPicture
+			var previewPicture = function (e) {
+
+				// e.files contient un objet FileList
+				const [picture] = e.files
+
+				// "picture" est un objet File
+				if (picture) {
+					// On change l'URL de l'image
+					image.src = URL.createObjectURL(picture)
+				}
+			} 
+		</script>
 
 		<section id="portfolio">
 			<div class="gallery-title">

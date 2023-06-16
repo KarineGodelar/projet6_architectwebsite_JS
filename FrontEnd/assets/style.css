@@ -256,7 +256,7 @@ li:hover {
 }
 
 .js-modale img {
-	height:20px;
+	height: 20px;
 }
 
 #portfolio h2 {
@@ -480,7 +480,7 @@ a {
 }
 
 .suppr-icon {
-	height:20px;
+	height: 20px;
 	position: absolute;
 	margin-top: 6px;
 	margin-left: 20px;
@@ -536,3 +536,10 @@ select {
 	height: 200px;
 	width: 500px;
 }
+
+#image {
+	max-height: 200px;
+	position: absolute;
+	margin-top: 50px;
+}
+
