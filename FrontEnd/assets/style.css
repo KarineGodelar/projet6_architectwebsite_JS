@@ -546,3 +546,7 @@ select {
 	position: absolute;
 	margin-top: 95px;
 }
+
+.green-button {
+	color: red;
+}
