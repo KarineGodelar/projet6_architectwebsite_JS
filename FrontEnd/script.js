@@ -295,7 +295,6 @@ function creerNewProject(e) {
 // Bouton ajouter photo
 
 photoForm.addEventListener("submit", async function (e) {
-    document.querySelector(".submit-ajout-photo").classList.add("green-button");
     creerNewProject(e);
     await fetch("http://localhost:5678/api/works/", {
         method: "POST",
