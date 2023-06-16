@@ -10,7 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
 	<meta name="description" content="">
-	<script type="module" src="script.js" defer></script>
+	<script src="script.js" defer></script>
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 
@@ -55,7 +55,7 @@
 
 
 
-		<aside id="modale" class="modal" aria-hidden="true" style="display: none;">
+		<aside id="modale" class="modal" style="display: none;">
 			<div class="modale-container js-modale-1-stop">
 				<button class="js-modale-1-close"> <img src="./assets/icons/croix.png" alt="icône de croix"></button>
 				<h3 class="modale-title">Galerie photo</h3>
@@ -82,13 +82,16 @@
 
 				<form id="form2" enctype="multipart/form-data" method="post"
 					action="http://localhost:5678/api/users/login" name="fileinfo" class="modale-form form2">
-					<img src="./assets/icons/ajout-photo.png" alt="icone pour ajouter des photos"
-						class="ajout-photo-image">
-					<label for="ajout-file-photo" class="label-ajout-photo-image">+ Ajouter photo</label>
-					<input type="file" id="ajout-file-photo" name="ajout-file-photo"
-						accept="image/jpg, image/jpeg, image/png" class="ajout-photo-button" onchange="previewPicture(this)" required>
-					<img src="" class="image-ajoutee">
-					<p class="ajout-photo-subtext" style="display:contents;">jpg, png : 4mo max</p>
+					<div class="ajout-photo">
+						<img src="./assets/icons/ajout-photo.png" alt="icone pour ajouter des photos"
+							class="ajout-photo-image">
+						<label for="ajout-file-photo" class="label-ajout-photo-image ajout-photo-button">+ Ajouter photo</label>
+						<input type="file" id="ajout-file-photo" name="ajout-file-photo"
+							accept="image/jpg, image/jpeg, image/png" class="ajout-photo-button"
+							onchange="previewPicture(this)" required style="display: none;">
+						<img src="" class="image-ajoutee">
+						<p class="ajout-photo-subtext" style="display:contents;">jpg, png : 4mo max</p>
+					</div>
 					<label for="title">Titre</label>
 					<input type="text" name="title" id="title">
 					<label for="form-category">Catégorie</label>
@@ -97,6 +100,7 @@
 						<option class="form-category-option" value="2">Appartements</option>
 						<option class="form-category-option" value="3">Hôtels & Restaurants</option>
 					</select>
+					<div class="grey-line"></div>
 					<div class="file-error-message"></div>
 					<div class="modale-error-message"></div>
 					<input type="submit" value="Valider" class="submit-ajout-photo">

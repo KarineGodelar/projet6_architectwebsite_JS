@@ -203,7 +203,14 @@ for (let i = 0; i < modalSection.length; i++) {
                 await fetch(`http://localhost:5678/api/works/${projets[i].id}`, {
                     method: "DELETE",
                     headers: { "Authorization": `Bearer ${tokenRecupere}` }
+
                 })
+                const afterDeleteProjets = projets.filter((projet)=>{
+                    return projet.id !== projets[i].id;
+                })
+
+                genererGallery(afterDeleteProjets);
+                genererPhotosModale(afterDeleteProjets);
             });
         }
 
@@ -231,22 +238,17 @@ console.log("balise ajout",document.getElementById("ajout-file-photo").value);
 balisePhotoFile.addEventListener("change", () => {
 
     if (document.getElementById("ajout-file-photo").value !== "") {
-    document.querySelector(".ajout-photo-subtext").style.display = "none";}
+    document.querySelector(".ajout-photo-image").style.display = "none";
+    document.querySelector(".label-ajout-photo-image").innerHTML = "changer de photo";
+    document.querySelector(".ajout-photo-button").style.display = "none";
+    document.querySelector(".ajout-photo-subtext").style.display = "none";
+
+}
 
 
 }
 
 )
-
-
-
-
-// .ajout-photo-image,
-// .label-ajout-photo-image,
-// .ajout-photo-button,
-// .ajout-photo-subtext {
-// 	display: none;
-// }
 
 
 // formulaire entier
@@ -290,8 +292,6 @@ function creerNewProject(e) {
 
 }
 
-
-
 // Bouton ajouter photo
 
 photoForm.addEventListener("submit", async function (e) {
@@ -304,6 +304,12 @@ photoForm.addEventListener("submit", async function (e) {
         },
         body: photoFormData
     });
+
+    const reponse = await fetch("http://localhost:5678/api/works/");
+    const projets = await reponse.json();
+
+    genererGallery(projets);
+    genererPhotosModale(projets);
 
 });
 

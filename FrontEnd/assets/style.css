@@ -490,6 +490,7 @@ a {
 	width: 420px;
 	height: 10px;
 	border-bottom: 1px solid #B3B3B3;
+	margin-top: 50px;
 }
 
 .suppr-gallery {
@@ -510,10 +511,13 @@ a {
 
 .ajout-photo-button {
 	font-family: 'Work Sans';
+	font-weight: 600;
 	margin: 10px;
 	color: #306685;
 	background-color: #CBD6DC;
 	border: none;
+	padding: 12px 32px;
+	border-radius: 50px;
 }
 
 
@@ -538,8 +542,7 @@ select {
 }
 
 #image {
-	max-height: 200px;
+	max-height: 169px;
 	position: absolute;
-	margin-top: 50px;
+	margin-top: 95px;
 }
-
