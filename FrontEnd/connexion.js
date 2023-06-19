@@ -10,9 +10,9 @@ function isLogged(token) {
 
 
 document.querySelector(".connexion-form").addEventListener("submit", async function (event) {
-  
 
-  
+
+
     event.preventDefault();
     const login = await {
         "email": event.target.querySelector("[name=email]").value,
@@ -25,22 +25,22 @@ document.querySelector(".connexion-form").addEventListener("submit", async funct
         body: chargeUtile
     });
     const loginOK = await loginReponse.json();
-    console.log (loginOK);
+    console.log(loginOK);
     window.localStorage.setItem("token", loginOK.token);
-    console.log (loginOK.message);
-    if (loginOK.token !== undefined ) {isLogged(loginOK.token);}
+    console.log(loginOK.message);
+    if (loginOK.token !== undefined) { isLogged(loginOK.token); }
 
-   try{    
-    if (loginOK.token === undefined ) {
-        throw new Error("Erreur dans l'identifiant ou le mot de passe");
-        
+    try {
+        if (loginOK.token === undefined) {
+            throw new Error("Erreur dans l'identifiant ou le mot de passe");
+
+        }
     }
-}
 
-catch (error) {
-            let errorMessage = document.querySelector(".error-message");
-            errorMessage.innerHTML = error.message;
-            console.log(error.message);
+    catch (error) {
+        let errorMessage = document.querySelector(".error-message");
+        errorMessage.innerHTML = error.message;
+        console.log(error.message);
 
-} 
+    }
 });

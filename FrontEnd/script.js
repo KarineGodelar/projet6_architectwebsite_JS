@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         const projetsObjets = Array.from(projets).filter(function (projet) {
             return projet.categoryId == 1;
-        })
+        });
         genererGallery(projetsObjets);
     });
 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         const projetsAppart = Array.from(projets).filter(function (projet) {
             return projet.categoryId == 2;
-        })
+        });
         genererGallery(projetsAppart);
     });
 
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         boutonAppart.classList.remove("green-button");
         const projetsHotels = Array.from(projets).filter(function (projet) {
             return projet.categoryId == 3;
-        })
+        });
         genererGallery(projetsHotels);
     });
 });
@@ -175,7 +175,7 @@ function backModale2(e) {
 }
 
 function closeModale2(e) {
-    const cibleModale1 = document.querySelector("#modale")
+    const cibleModale1 = document.querySelector("#modale");
     if (cibleModale === null) return;
 
     e.preventDefault();
@@ -204,20 +204,16 @@ for (let i = 0; i < modalSection.length; i++) {
                 await fetch(`http://localhost:5678/api/works/${projets[i].id}`, {
                     method: "DELETE",
                     headers: { "Authorization": `Bearer ${tokenRecupere}` }
-
-                })
+                });
                 const afterDeleteProjets = projets.filter((projet) => {
                     return projet.id !== projets[i].id;
-                })
-
+                });
                 genererGallery(afterDeleteProjets);
                 genererPhotosModale(afterDeleteProjets);
             });
         }
-
-    })
-
-};
+    });
+}
 
 // Fermeture de la modale page 1 par la croix
 
@@ -240,7 +236,7 @@ balisePhotoFile.addEventListener("change", () => {
         document.querySelector(".ajout-photo-button").style.display = "none";
         document.querySelector(".ajout-photo-subtext").style.display = "none";
     }
-})
+});
 
 // Formulaire entier modale page 2
 
@@ -253,7 +249,7 @@ function creerNewProject(e) {
     let photoTitle = balisePhotoTitle.value;
     let baliseCategory = document.getElementById("form-category");
     let photoCategory = baliseCategory.value;
-    let fileRegex = new RegExp("[a-z0-9._-]+\.(png|jpg)$");
+    let fileRegex = new RegExp("[a-z0-9._-]+(png|jpg)$");
     let titleRegex = new RegExp("[a-z0-9._-]");
 
     let fileErrorMessage = document.querySelector(".file-error-message");
