@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     genererGallery(projets);
 
+    // Création des boutons de filtrage
+
     const boutonTous = document.querySelector(".tous-button");
     boutonTous.addEventListener("click", () => {
         genererGallery(projets);
@@ -64,7 +66,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         boutonTous.classList.remove("green-button");
         boutonObjets.classList.remove("green-button");
         boutonAppart.classList.remove("green-button");
-
         const projetsHotels = Array.from(projets).filter(function (projet) {
             return projet.categoryId == 3;
         })
@@ -72,7 +73,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 });
 
-// gestion connexion / déconnexion
+// Gestion connexion / déconnexion
+
 const modalSection = document.querySelectorAll(".js-modale");
 const tokenRecupere = window.localStorage.getItem("token");
 console.log("token recupéré de l'API :", tokenRecupere);
@@ -89,8 +91,7 @@ if (tokenRecupere !== null) {
     }
 }
 
-// Fenêtre modale
-
+// Fenêtre modale 1
 
 let cibleModale = null;
 
@@ -126,8 +127,6 @@ for (let i = 0; i < modalSection.length; i++) {
     });
 }
 
-
-
 function genererPhotosModale(projets) {
     const gallerySection = document.querySelector(".gallery-modale");
     gallerySection.innerHTML = "";
@@ -150,7 +149,7 @@ function genererPhotosModale(projets) {
     }
 }
 
-//modale 2 , je recopie la fonction openModale
+//Fonctions pour la modale 2
 
 function openModale2(e) {
     e.preventDefault();
@@ -195,7 +194,9 @@ for (let i = 0; i < modalSection.length; i++) {
         const reponse = await fetch("http://localhost:5678/api/works/");
         const projets = await reponse.json();
         genererPhotosModale(projets);
-        // clic sur bouton supprimer
+
+        // Clic sur bouton supprimer avec le logo de la poubelle
+
         const supprIcons = document.querySelectorAll(".suppr-icon");
         for (let i = 0; i < supprIcons.length; i++) {
             supprIcons[i].addEventListener("click", async function (e) {
@@ -205,7 +206,7 @@ for (let i = 0; i < modalSection.length; i++) {
                     headers: { "Authorization": `Bearer ${tokenRecupere}` }
 
                 })
-                const afterDeleteProjets = projets.filter((projet)=>{
+                const afterDeleteProjets = projets.filter((projet) => {
                     return projet.id !== projets[i].id;
                 })
 
@@ -218,7 +219,7 @@ for (let i = 0; i < modalSection.length; i++) {
 
 };
 
-// fermer la modale 1 par la X
+// Fermeture de la modale page 1 par la croix
 
 document.querySelector(".js-modale-1-close").addEventListener("click", () => {
     document.querySelector("#modale").style.display = "none";
@@ -228,45 +229,31 @@ document.querySelector(".ajouter-photo").addEventListener("click", function (e) 
     openModale2(e);
 });
 
-// Formulaire modale 2 partie ajout photo
+// Formulaire modale page 2 partie "Ajout photo"
 
 let balisePhotoFile = document.getElementById("ajout-file-photo");
 
-
-console.log("balise ajout",document.getElementById("ajout-file-photo").value);
-
 balisePhotoFile.addEventListener("change", () => {
-
     if (document.getElementById("ajout-file-photo").value !== "") {
-    document.querySelector(".ajout-photo-image").style.display = "none";
-    document.querySelector(".label-ajout-photo-image").innerHTML = "changer de photo";
-    document.querySelector(".ajout-photo-button").style.display = "none";
-    document.querySelector(".ajout-photo-subtext").style.display = "none";
+        document.querySelector(".ajout-photo-image").style.display = "none";
+        document.querySelector(".label-ajout-photo-image").innerHTML = "changer de photo";
+        document.querySelector(".ajout-photo-button").style.display = "none";
+        document.querySelector(".ajout-photo-subtext").style.display = "none";
+    }
+})
 
-}
-
-
-}
-
-)
-
-
-// formulaire entier
+// Formulaire entier modale page 2
 
 let photoForm = document.querySelector(".form2");
 var photoFormData = new FormData();
 function creerNewProject(e) {
     e.preventDefault();
-
     let photoFile = balisePhotoFile.value;
-
     let balisePhotoTitle = document.getElementById("title");
     let photoTitle = balisePhotoTitle.value;
-
     let baliseCategory = document.getElementById("form-category");
     let photoCategory = baliseCategory.value;
     let fileRegex = new RegExp("[a-z0-9._-]+\.(png|jpg)$");
-
     let titleRegex = new RegExp("[a-z0-9._-]");
 
     let fileErrorMessage = document.querySelector(".file-error-message");
@@ -281,18 +268,12 @@ function creerNewProject(e) {
     } else {
         modaleErrorMessage.innerHTML = "";
     }
-
     photoFormData.append("image", balisePhotoFile.files[0]);
     photoFormData.append("title", photoTitle);
     photoFormData.append("category", photoCategory);
-
-
-    console.log(balisePhotoFile.files[0]);
-
-
 }
 
-// Bouton ajouter photo
+// Bouton ajouter photo modale page 2
 
 photoForm.addEventListener("submit", async function (e) {
     creerNewProject(e);
@@ -303,13 +284,11 @@ photoForm.addEventListener("submit", async function (e) {
         },
         body: photoFormData
     });
-
     const reponse = await fetch("http://localhost:5678/api/works/");
     const projets = await reponse.json();
 
     genererGallery(projets);
     genererPhotosModale(projets);
-
 });
 
 
