@@ -224,6 +224,11 @@ document.querySelector(".js-modale-1-close").addEventListener("click", () => {
 document.querySelector(".ajouter-photo").addEventListener("click", async function (e) {
     openModale2(e);
 
+    //Effacer les derniers projets entrés
+
+    document.querySelector("#ajout-file-photo").files[0] = null;
+    document.querySelector("#photo-title").value = "";
+
     // Récupérer les catégories dans l'API
     let categorySection = document.querySelector("#form-category");
     categorySection.innerHTML = "";
