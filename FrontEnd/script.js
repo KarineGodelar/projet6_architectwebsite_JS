@@ -221,8 +221,23 @@ document.querySelector(".js-modale-1-close").addEventListener("click", () => {
     document.querySelector("#modale").style.display = "none";
 });
 
-document.querySelector(".ajouter-photo").addEventListener("click", function (e) {
+document.querySelector(".ajouter-photo").addEventListener("click", async function (e) {
     openModale2(e);
+
+    // Récupérer les catégories dans l'API
+    let categorySection = document.querySelector("#form-category");
+    categorySection.innerHTML = "";
+    const reponse = await fetch("http://localhost:5678/api/categories/");
+    const categories = await reponse.json();
+    console.log("categories", categories);
+    for (let i = 0; i < categories.length; i++) {
+        const categoryOption = document.createElement("option");
+        categoryOption.value = categories[i].id;
+        categoryOption.innerHTML = categories[i].name;
+        categoryOption.classList.add("form-category-option");
+        categorySection.appendChild(categoryOption);
+    }
+
 });
 
 // Formulaire modale page 2 partie "Ajout photo"
@@ -240,26 +255,25 @@ balisePhotoFile.addEventListener("change", () => {
 
 // Formulaire entier modale page 2
 
-let photoForm = document.querySelector("#form2");
+let photoForm = document.querySelector(".form2");
 var photoFormData = new FormData();
 function creerNewProject(e) {
     e.preventDefault();
     let photoFile = balisePhotoFile.value;
-    let balisePhotoTitle = document.getElementById("title");
+    let balisePhotoTitle = document.getElementById("photo-title");
     let photoTitle = balisePhotoTitle.value;
     let baliseCategory = document.getElementById("form-category");
     let photoCategory = baliseCategory.value;
-    let fileRegex = new RegExp("[a-z0-9._-]+/.(png|jpg)$");
+    let fileRegex = new RegExp("[a-z0-9._-]+.(png|jpg)");
     let fileErrorMessage = document.querySelector(".file-error-message");
     if (fileRegex.test(photoFile) === false) {
         fileErrorMessage.innerHTML = "Le fichier choisi n'est pas valide";
     } else {
         fileErrorMessage.innerHTML = "";
     }
-    let title = document.getElementById("photo-title").value;
     let titleRegex = new RegExp("[a-z0-9._-]");
     let modaleErrorMessage = document.querySelector(".modale-error-message");
-    if (titleRegex.test(title) === false) {
+    if (titleRegex.test(photoTitle) === false) {
         modaleErrorMessage.innerHTML = "Le titre saisi n'est pas valide";
     } else {
         modaleErrorMessage.innerHTML = "";
@@ -269,12 +283,17 @@ function creerNewProject(e) {
     photoFormData.append("image", balisePhotoFile.files[0]);
     photoFormData.append("title", photoTitle);
     photoFormData.append("category", photoCategory);
+
+    console.log("image", balisePhotoFile.files[0]);
+    console.log("title", photoTitle);
+    console.log("category", photoCategory);
+
+
 }
 
 // Bouton ajouter photo modale page 2
 
 photoForm.addEventListener("submit", async function (e) {
-    alert("yeah!");
     creerNewProject(e);
     await fetch("http://localhost:5678/api/works/", {
         method: "POST",
@@ -289,3 +308,9 @@ photoForm.addEventListener("submit", async function (e) {
     genererGallery(projets);
     genererPhotosModale(projets);
 });
+
+
+
+
+
+
