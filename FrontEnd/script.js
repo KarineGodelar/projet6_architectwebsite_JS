@@ -240,7 +240,7 @@ balisePhotoFile.addEventListener("change", () => {
 
 // Formulaire entier modale page 2
 
-let photoForm = document.querySelector(".form2");
+let photoForm = document.querySelector("#form2");
 var photoFormData = new FormData();
 function creerNewProject(e) {
     e.preventDefault();
@@ -256,12 +256,7 @@ function creerNewProject(e) {
     } else {
         fileErrorMessage.innerHTML = "";
     }
-    photoFormData.append("image", balisePhotoFile.files[0]);
-    photoFormData.append("title", photoTitle);
-    photoFormData.append("category", photoCategory);
-}
-
-function gererErreurTitle(title) {
+    let title = document.getElementById("photo-title").value;
     let titleRegex = new RegExp("[a-z0-9._-]");
     let modaleErrorMessage = document.querySelector(".modale-error-message");
     if (titleRegex.test(title) === false) {
@@ -269,11 +264,17 @@ function gererErreurTitle(title) {
     } else {
         modaleErrorMessage.innerHTML = "";
     }
+
+
+    photoFormData.append("image", balisePhotoFile.files[0]);
+    photoFormData.append("title", photoTitle);
+    photoFormData.append("category", photoCategory);
 }
 
 // Bouton ajouter photo modale page 2
 
 photoForm.addEventListener("submit", async function (e) {
+    alert("yeah!");
     creerNewProject(e);
     await fetch("http://localhost:5678/api/works/", {
         method: "POST",
@@ -288,10 +289,3 @@ photoForm.addEventListener("submit", async function (e) {
     genererGallery(projets);
     genererPhotosModale(projets);
 });
-
-document.getElementById("photo-title").addEventListener("input", (e)=>{
-    e.preventDefault();
-    let title = document.getElementById("photo-title").value;
-    gererErreurTitle(title);
-});
-
