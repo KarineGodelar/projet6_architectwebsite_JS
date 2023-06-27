@@ -258,25 +258,36 @@ balisePhotoFile.addEventListener("change", () => {
     }
 });
 
-// Formulaire entier modale page 2
+
+
+// Bouton "Ajouter photo" modale page 2
 
 let photoForm = document.querySelector(".form2");
-var photoFormData = new FormData();
-function creerNewProject(e) {
+
+photoForm.addEventListener("submit", async function (e) {
+
     e.preventDefault();
+
+    //Check des erreurs
+
+    let fileRegex = new RegExp("[a-z0-9._-]+.(png|jpg)");
+    let titleRegex = new RegExp("[a-z0-9._-]");
+
     let photoFile = balisePhotoFile.value;
+
     let balisePhotoTitle = document.getElementById("photo-title");
     let photoTitle = balisePhotoTitle.value;
+
     let baliseCategory = document.getElementById("form-category");
     let photoCategory = baliseCategory.value;
-    let fileRegex = new RegExp("[a-z0-9._-]+.(png|jpg)");
+
     let fileErrorMessage = document.querySelector(".file-error-message");
     if (fileRegex.test(photoFile) === false) {
         fileErrorMessage.innerHTML = "Le fichier choisi n'est pas valide";
     } else {
         fileErrorMessage.innerHTML = "";
     }
-    let titleRegex = new RegExp("[a-z0-9._-]");
+
     let modaleErrorMessage = document.querySelector(".modale-error-message");
     if (titleRegex.test(photoTitle) === false) {
         modaleErrorMessage.innerHTML = "Le titre saisi n'est pas valide";
@@ -285,37 +296,32 @@ function creerNewProject(e) {
     }
 
 
-    photoFormData.append("image", balisePhotoFile.files[0]);
-    photoFormData.append("title", photoTitle);
-    photoFormData.append("category", photoCategory);
-
-    console.log("image", balisePhotoFile.files[0]);
-    console.log("title", photoTitle);
-    console.log("category", photoCategory);
+    // FormData qui se fait si il n'y a pas d'erreurs
 
 
-}
+    if ((titleRegex.test(photoTitle) === true) && (fileRegex.test(photoFile) === true)) {
 
-// Bouton ajouter photo modale page 2
 
-photoForm.addEventListener("submit", async function (e) {
-    creerNewProject(e);
-    await fetch("http://localhost:5678/api/works/", {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${tokenRecupere}`
-        },
-        body: photoFormData
-    });
-    const reponse = await fetch("http://localhost:5678/api/works/");
-    const projets = await reponse.json();
+        var photoFormData = new FormData();
 
-    genererGallery(projets);
-    genererPhotosModale(projets);
+        photoFormData.append("image", balisePhotoFile.files[0]);
+        photoFormData.append("title", photoTitle);
+        photoFormData.append("category", photoCategory);
+
+        // fetch
+
+        await fetch("http://localhost:5678/api/works/", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${tokenRecupere}`
+            },
+            body: photoFormData
+        });
+        const reponse = await fetch("http://localhost:5678/api/works/");
+        const projets = await reponse.json();
+
+        genererGallery(projets);
+        genererPhotosModale(projets);
+
+    }
 });
-
-
-
-
-
-
