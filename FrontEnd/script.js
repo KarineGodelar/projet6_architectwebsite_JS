@@ -25,53 +25,36 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     // Création des boutons de filtrage
 
-    const boutonTous = document.querySelector(".tous-button");
-    boutonTous.addEventListener("click", () => {
+
+    let categoriesSection = document.querySelector(".categories");
+    categoriesSection.innerHTML = "";
+    const catReponse = await fetch("http://localhost:5678/api/categories/");
+    const categories = await catReponse.json();
+
+    const tousButton = document.createElement("button");
+    tousButton.innerHTML = "Tous";
+    categoriesSection.appendChild(tousButton);
+    tousButton.addEventListener("click", () => {
         genererGallery(projets);
-        boutonTous.classList.add("green-button");
-        boutonObjets.classList.remove("green-button");
-        boutonAppart.classList.remove("green-button");
-        boutonHotels.classList.remove("green-button");
     });
 
-    const boutonObjets = document.querySelector(".objets-button");
-    boutonObjets.addEventListener("click", async function () {
-        boutonObjets.classList.add("green-button");
-        boutonTous.classList.remove("green-button");
-        boutonAppart.classList.remove("green-button");
-        boutonHotels.classList.remove("green-button");
+    for (let i = 0; i < categories.length; i++) {
+        const categoryButton = document.createElement("button");
+        categoryButton.value = categories[i].id;
+        categoryButton.innerHTML = categories[i].name;
+        categoriesSection.appendChild(categoryButton);
 
-        const projetsObjets = Array.from(projets).filter(function (projet) {
-            return projet.categoryId == 1;
+        categoryButton.addEventListener("click", () => {
+            //document.getElementsByTagName("button").classList.remove("green-button");
+            // categoryButton.classList.add("green-button");
+            const filteredProjets = Array.from(projets).filter(function (projet) {
+                return projet.categoryId == categories[i].id;
+            });
+            genererGallery(filteredProjets);
         });
-        genererGallery(projetsObjets);
-    });
-
-    const boutonAppart = document.querySelector(".appart-button");
-    boutonAppart.addEventListener("click", async function () {
-        boutonAppart.classList.add("green-button");
-        boutonTous.classList.remove("green-button");
-        boutonObjets.classList.remove("green-button");
-        boutonHotels.classList.remove("green-button");
-
-        const projetsAppart = Array.from(projets).filter(function (projet) {
-            return projet.categoryId == 2;
-        });
-        genererGallery(projetsAppart);
-    });
-
-    const boutonHotels = document.querySelector(".hotels-button");
-    boutonHotels.addEventListener("click", async function () {
-        boutonHotels.classList.add("green-button");
-        boutonTous.classList.remove("green-button");
-        boutonObjets.classList.remove("green-button");
-        boutonAppart.classList.remove("green-button");
-        const projetsHotels = Array.from(projets).filter(function (projet) {
-            return projet.categoryId == 3;
-        });
-        genererGallery(projetsHotels);
-    });
+    }
 });
+
 
 // Gestion connexion / déconnexion
 
