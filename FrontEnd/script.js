@@ -35,18 +35,26 @@ document.addEventListener("DOMContentLoaded", async function () {
     tousButton.innerHTML = "Tous";
     categoriesSection.appendChild(tousButton);
     tousButton.addEventListener("click", () => {
+        for (let j = 0; j < buttonTable.length; j++) {
+            buttonTable[j].classList.remove("green-button");
+        }
+        tousButton.classList.add("green-button");
         genererGallery(projets);
     });
+
+    const buttonTable = [tousButton];
 
     for (let i = 0; i < categories.length; i++) {
         const categoryButton = document.createElement("button");
         categoryButton.value = categories[i].id;
         categoryButton.innerHTML = categories[i].name;
         categoriesSection.appendChild(categoryButton);
-
+        buttonTable.push(categoryButton);
         categoryButton.addEventListener("click", () => {
-            //document.getElementsByTagName("button").classList.remove("green-button");
-            // categoryButton.classList.add("green-button");
+            for (let j = 0; j < buttonTable.length; j++) {
+                buttonTable[j].classList.remove("green-button");
+            }
+            categoryButton.classList.add("green-button");
             const filteredProjets = Array.from(projets).filter(function (projet) {
                 return projet.categoryId == categories[i].id;
             });
